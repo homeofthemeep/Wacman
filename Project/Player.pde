@@ -1,6 +1,6 @@
 public class Player
 {
-  public int x, y, direction, storedDir, score;
+  public int x, y, direction, storedDir, score, ammo;
   
   public Node curNode, prevNode, targetNode;
   RectCollision body;
@@ -80,23 +80,25 @@ public class Player
           prevNode = curNode;
           curNode = null;
       }
+      if(frameCount%2 == 0)
       switch(direction)
       {
-        case 0: y--; break;
-        case 1: y++; break;
-        case 2: x--; break;
-        case 3: x++; break;
+        case 0: y-=5; break;
+        case 1: y+=5; break;
+        case 2: x-=5; break;
+        case 3: x+=5; break;
       }
       body.updateCol(x,y);
     }
     if (targetNode != curNode && targetNode != null)
     {
+      if(frameCount%2 == 0)
       switch(direction)
       {
-        case 0: y--; break;
-        case 1: y++; break;
-        case 2: x--; break;
-        case 3: x++; break;
+        case 0: y-=5; break;
+        case 1: y+=5; break;
+        case 2: x-=5; break;
+        case 3: x+=5; break;
       }
       body.updateCol(x,y);
     }
@@ -104,12 +106,13 @@ public class Player
     if(board.isTouchingWall())
     {
       //System.out.println(board.isTouchingWall());
+      if(frameCount%2 == 0)
       switch(direction)
       {
-        case 0: y++; break;
-        case 1: y--; break;
-        case 2: x++; break;
-        case 3: x--; break;
+        case 0: y+=5; break;
+        case 1: y-=5; break;
+        case 2: x+=5; break;
+        case 3: x-=5; break;
       }
       body.updateCol(x,y);
     }
