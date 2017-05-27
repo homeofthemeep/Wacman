@@ -90,35 +90,6 @@ public class Player
     }
     if (targetNode != curNode && targetNode != null)
     {
-      //System.out.println(overShotTarget());
-      /*
-      if(overShotTarget())
-      {
-        
-        if(curNode != null)
-        {
-        player.x = curNode.x1;
-        player.y = curNode.y1;
-        }
-        
-        Node moveToNode = canMove(storedDir); // can move returns the valid neighbor in which we are moving
-        
-        if(moveToNode != null)
-          direction = storedDir;
-          
-        if(moveToNode == null)
-          moveToNode = canMove(direction);
-          
-        if(moveToNode != null)
-        {
-          targetNode = moveToNode;
-          prevNode = curNode;
-          curNode = null;
-        }
-        
-      }
-      */
-      
       switch(direction)
       {
         case 0: y--; break;
@@ -131,7 +102,7 @@ public class Player
     
     if(board.isTouchingWall())
     {
-      System.out.println(board.isTouchingWall());
+      //System.out.println(board.isTouchingWall());
       switch(direction)
       {
         case 0: y++; break;

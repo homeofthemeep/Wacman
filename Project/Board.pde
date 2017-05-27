@@ -5,6 +5,7 @@ public class Board
   public int x,y,w,h;
   RectCollision[] colList;
   Node[] nList;
+  Pellet[] pList;
   //RectCollision temp;
   //RectCollision[] isTurnList;
   
@@ -13,6 +14,7 @@ public class Board
     background = loadImage("wacman_layout1.png");
     colList = new RectCollision[64];
     nList = new Node[64];
+    pList = new Pellet[140];
     
     //x = 0; y = 0; w = 1336; h = 50;    
     //colList[0] = new RectCollision(x,y,w,h);
@@ -112,12 +114,79 @@ public class Board
     nList[27].setNeighbors(new Node[]{nList[23], null, nList[26], nList[28]});
     nList[28].setNeighbors(new Node[]{nList[25], null, nList[27], nList[29]});
     nList[29].setNeighbors(new Node[]{nList[22], null, nList[28], null});
+    
+    x = y = 21;
+    for(int i = 0; i < 10; i++)
+    {
+      pList[i] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2-350)+y, 8,8);
+    }    
+    for(int i = 0; i < 10; i++)
+    {
+      if(i != 1 && i != 3 && i != 4 && i != 5 && i != 6 && i != 8)
+      pList[i+10] = new Pellet(width/2-250 + (i*50), height/2-300, (width/2-250 + (i*50))+x, (height/2-300)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      pList[i+20] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2-250)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      if(i != 1 && i != 3 && i != 4 && i != 5 && i != 6 && i != 8)
+      pList[i+30] = new Pellet(width/2-250 + (i*50), height/2-300, (width/2-250 + (i*50))+x, (height/2-200)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      if(i != 1 && i != 3 && i != 4 && i != 5 && i != 6 && i != 8)
+      pList[i+40] = new Pellet(width/2-250 + (i*50), height/2-300, (width/2-250 + (i*50))+x, (height/2-150)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      pList[i+50] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2-100)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      if(i == 1 || i == 8)
+      pList[i+60] = new Pellet(width/2-250 + (i*50), height/2-300, (width/2-250 + (i*50))+x, (height/2-50)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      pList[i+70] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      if(i == 0 || i == 4 || i == 9)
+      pList[i+80] = new Pellet(width/2-250 + (i*50), height/2-300, (width/2-250 + (i*50))+x, (height/2+50)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      pList[i+90] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2+100)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      if(i == 0 || i == 5 || i == 9)
+      pList[i+100] = new Pellet(width/2-250 + (i*50), height/2-300, (width/2-250 + (i*50))+x, (height/2+150)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      if(i != 1 && i != 8)
+      pList[i+110] = new Pellet(width/2-250 + (i*50), height/2-300, (width/2-250 + (i*50))+x, (height/2+200)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      if(i == 0 || i == 2 || i == 7 || i == 9)
+      pList[i+120] = new Pellet(width/2-250 + (i*50), height/2-300, (width/2-250 + (i*50))+x, (height/2+250)+y, 8,8);
+    }
+    for(int i = 0; i < 10; i++)
+    {
+      pList[i+130] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2+300)+y, 8,8);
+    }
   }
   
   void show()
   {
     image(background, width/2-300, height/2-400);
-
+    
+    /*
     for(int i = 0; i < colList.length; i++)
     {
       if(colList[i] != null)
@@ -129,7 +198,12 @@ public class Board
       if(nList[i] != null)
         nList[i].show();
     }
-    
+    */
+    for(int i = 0; i < pList.length; i++)
+    {
+      if(pList[i] != null)
+        pList[i].show();
+    }
   }
   
   public boolean isTouchingWall()
