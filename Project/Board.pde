@@ -1,13 +1,11 @@
 
 public class Board
 {
-  PImage background;
+  PImage background; //The background image that is going to drawn.
   public int x,y,w,h;
-  RectCollision[] colList;
-  Node[] nList;
-  Pellet[] pList;
-  //RectCollision temp;
-  //RectCollision[] isTurnList;
+  RectCollision[] colList; //An array of collisons that are bounds to stop the player and ghosts.
+  Node[] nList; // An array of nodes that the player and ghosts are moving through 
+  Pellet[] pList; //An array of pellets that the player will be picking up
   
   public Board()
   {
@@ -19,6 +17,7 @@ public class Board
     //x = 0; y = 0; w = 1336; h = 50;    
     //colList[0] = new RectCollision(x,y,w,h);
     
+    //The following the creation of all wall collisions. Credit to Wyatt for making this.
     colList[0] = new RectCollision(width/2-150, height/2-50, 299,49);
     colList[1] = new RectCollision(width/2, height/2+50, 199,49);
     colList[2] = new RectCollision(width/2-300, height/2-400, 599,49);//top
@@ -41,6 +40,7 @@ public class Board
     colList[19] = new RectCollision(width/2+150, height/2+150, 49,149);//
     colList[20] = new RectCollision(width/2-100, height/2+250, 199, 49);
     
+    //The flowing set of lists are the nodes that are created for wacman to travel on. 
     nList[0] = new Node(width/2-250, height/2-350, 49,49);//top-line
     nList[1] = new Node(width/2-150, height/2-350, 49,49);
     nList[2] = new Node(width/2+100, height/2-350, 49,49);
@@ -78,6 +78,8 @@ public class Board
     nList[28] = new Node(width/2+100, height/2+300, 49,49);
     nList[29] = new Node(width/2+200, height/2+300, 49,49);
     
+    //This following set of lists set the neighbors of each node. This is so that valid directions are found out from each node to it neighbors.
+    //This was all done by hand
     nList[0].setNeighbors(new Node[]{null, nList[4], null, nList[1]});//Neighboring nodes from top line
     nList[1].setNeighbors(new Node[]{null, nList[5], nList[0], nList[2]});
     nList[2].setNeighbors(new Node[]{null, nList[6], nList[1], nList[3]});
@@ -115,6 +117,8 @@ public class Board
     nList[28].setNeighbors(new Node[]{nList[25], null, nList[27], nList[29]});
     nList[29].setNeighbors(new Node[]{nList[22], null, nList[28], null});
     
+    //PELLETS
+    //I used some mental math to create some loops that accurately place pellets. THIS IS INCREDIBLY INNEFICIENT STILL. I use a lot less spaces in the array memory than I need. This was just quicker than doing it by hand like above.
     x = y = 21;
     for(int i = 0; i < 10; i++)
     {
@@ -194,12 +198,13 @@ public class Board
       else
         pList[i+130] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2+300)+y, 8,8);
     }
+    //END PELLETS
   }
   
   void show()
   {
-    image(background, width/2-300, height/2-400);
-    
+    image(background, width/2-300, height/2-400);//Draws the image on the bottom
+    //The following commented code is for debugging purposes. This draws the nodes and collision that have been made. Only do this for testing.
     /*
     for(int i = 0; i < colList.length; i++)
     {
@@ -213,14 +218,14 @@ public class Board
         nList[i].show();
     }
     */
-    for(int i = 0; i < pList.length; i++)
+    for(int i = 0; i < pList.length; i++) // This loop draws each pellet
     {
       if(pList[i] != null)
         pList[i].show();
     }
   }
   
-  public void updatePellet()
+  public void updatePellet() //Finds if any pellet on the board is picked up. Checks for bigPellets too.
   {
     int checker = isTouchingPellet();
     
@@ -241,7 +246,7 @@ public class Board
     }
   }
   
-  public boolean isTouchingWall()
+  public boolean isTouchingWall() //Checks if the player is colliding with any wall.
   {
     for(int i = 0; i < colList.length; i++)
     {
@@ -253,7 +258,7 @@ public class Board
     return false;
   }
   
-  public boolean isGhostTouchingWall()
+  public boolean isGhostTouchingWall() //Checks if any ghost is colliding with any wall.
   {
     for(int i = 0; i < colList.length; i++)
     {
@@ -268,7 +273,7 @@ public class Board
     return false;
   }
   
-  public int isBulletTouchingWall()
+  public int isBulletTouchingWall() // Checks if any bullet is colliding with any wall.
   {
     for(int i = 0; i < colList.length; i++)
     {
@@ -285,7 +290,7 @@ public class Board
   
   
   
-  public int isTouchingPellet()
+  public int isTouchingPellet() //This checks if the player has touched any pellet. If so then return the index of the pellet in the array of pellets declared above. Return -1 if none of them are.
   {
     for(int i = 0; i < pList.length; i++)
     {
@@ -297,11 +302,11 @@ public class Board
     return -1;
   }
   
-  public int isOLappingNode()
+  public int isOLappingNode() //This checks if the player is overlapping with a node. Returns the index of the node in the array of nodes declared above. Return -1 if none of them are.
   {
     for(int i = 0; i < nList.length; i++)
     {
-      if(nList[i] != null && nList[i].x1 == player.x && nList[i].y1 == player.y)//NullPointer expection
+      if(nList[i] != null && nList[i].x1 == player.x && nList[i].y1 == player.y)
       {
         return i;
       }
@@ -309,11 +314,11 @@ public class Board
     return -1;
   }
   
-  public int isGOLappingNode(int z)
+  public int isGOLappingNode(int z)  //This checks if the ghost in the ghost array at int z is overlapping with a node. Returns the index of the node in the array of nodes declared above. Return -1 if none of them are.
   {
     for(int i = 0; i < nList.length; i++)
     {
-      if(nList[i] != null && nList[i].x1 == gList[z].x && nList[i].y1 == gList[z].y)//NullPointer expection
+      if(nList[i] != null && nList[i].x1 == gList[z].x && nList[i].y1 == gList[z].y)
       {
         return i;
       }

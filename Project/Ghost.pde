@@ -1,11 +1,12 @@
 public class Ghost
 {
-  public int x, y, direction, maxHealth;
-  public boolean[] types;
-  public Node curNode, prevNode, targetNode;
+  public int x, y, direction, maxHealth; // Ghosts have health as they can be shot until they are nullified
+  public boolean[] types; //This denotes whether the ghost is Blinky, Pinky, Inky, or Clyde
+  public Node curNode, prevNode, targetNode; //These are the ingredients for the magic moving stuff
   public RectCollision body;
-  public int iter = 0;
+  public int iter = 0; // This is the iterator that goes over the different types of ghosts to spawn them.
   
+  //CONSTRUCTOR
   public Ghost(int x, int y, int wCol, int hCol, boolean[] b)
   {
     body = new RectCollision(width/2, height/2, wCol-1, hCol-1);
@@ -15,11 +16,12 @@ public class Ghost
     direction = (int)random(0, 4);
   }
   
-  public Ghost()
+  public Ghost()//Empty constructor for usefully useless "ghost"
   {
   }
+  //END CONSTRUCTOR
   
-  public void show()
+  public void show()//Draws the ghost based on which type
   {
     if(types[0] == true) //Blinky
     {
@@ -47,8 +49,7 @@ public class Ghost
       fill(255,170,0);
       rect(x,y,49,49);
       fill(255);
-    }
-    
+    }   
   }
   
   public Node getNodeAtPos(int z)
@@ -61,13 +62,12 @@ public class Ghost
     return null;
   }
   
-  void spawn()
-  {
-    
-    
+  void spawn() //This method spawns ghost of different types in different places
+  {    
+    //The method uses a var called iter to loop through the ghosts that are alive and not spawned
     if(iter == 0 && gList[iter] == null)
     {
-      gList[iter] = new Ghost(board.nList[5].x1, board.nList[5].y1, 50, 50, new boolean[]{true, false, false, false});
+      gList[iter] = new Ghost(board.nList[5].x1, board.nList[5].y1, 50, 50, new boolean[]{true, false, false, false}); //Spawns Blinky's
       curNode = board.nList[5];
       iter++; return;
     }
@@ -75,7 +75,7 @@ public class Ghost
     
     if(iter == 1 && gList[iter] == null)
     {
-      gList[iter] = new Ghost(board.nList[6].x1, board.nList[6].y1, 50, 50, new boolean[]{false, true, false, false});
+      gList[iter] = new Ghost(board.nList[6].x1, board.nList[6].y1, 50, 50, new boolean[]{false, true, false, false}); //Spawns Pinky's
       curNode = board.nList[6];
       iter++; return;
     }
@@ -83,7 +83,7 @@ public class Ghost
     
     if(iter == 2 && gList[iter] == null)
     {
-      gList[iter] = new Ghost(board.nList[23].x1, board.nList[23].y1, 50, 50, new boolean[]{false, false, true, false});
+      gList[iter] = new Ghost(board.nList[23].x1, board.nList[23].y1, 50, 50, new boolean[]{false, false, true, false}); //Spawns Inky's
       curNode = board.nList[23];
       iter++; return;
     }
@@ -91,7 +91,7 @@ public class Ghost
     
     if(iter == 3 && gList[iter] == null)
     {
-      gList[iter] = new Ghost(board.nList[25].x1, board.nList[25].y1, 50, 50, new boolean[]{false, false, false, true});
+      gList[iter] = new Ghost(board.nList[25].x1, board.nList[25].y1, 50, 50, new boolean[]{false, false, false, true}); //Spawns Clyde's
       curNode = board.nList[25];
       iter = 0; return;
     }
@@ -99,12 +99,12 @@ public class Ghost
     
   }
   
-  public void move()
+  public void move()//Moves the ghost in 4 different random direction, uses magic
   {
     if(curNode != null)
     {
         direction = (int)random(0, 4);
-        while(canMove(direction) == null)
+        while(canMove(direction) == null)//Got to make sure the ghost can move in that random direction, this takes care of that
         {
           direction = (int)random(0, 4);
         }
@@ -130,10 +130,10 @@ public class Ghost
         case 3: x-=5; break;
       }
       body.updateCol(x,y);
-    }
+    }//if ghost is colliding with a wall push them back
   }
   
-  public Node canMove(int dir)
+  public Node canMove(int dir)//Reuturns a valid node that the ghost wants to move to that is a neighbor from the ghost's current node. Returns null if there is no valid node in that direction
   {
     Node moveToNode = null;        
     for(int i = 0; i < curNode.neighbors.length; i++)
@@ -143,7 +143,7 @@ public class Ghost
     return moveToNode;    
   }
   
-  public int isHit()
+  public int isHit() // This checks to see if a ghost is hit by a bullet. If the ghost is hit we remove the bullet from the game. Returns which ghost got hit
   {
     for(int i = 0; i < bList.size(); i++)
     {
@@ -158,9 +158,9 @@ public class Ghost
     }
     return -1;
   }
-  public void updateGhost()
-  {
   
+  public void updateGhost()//Called in draw. This method updates ghost health and "aliveness".
+  {  
     int checker = ghost.isHit();
     if(checker != -1)
     {
@@ -169,12 +169,8 @@ public class Ghost
       {
         gList[checker] = null;
         ghostCounter--;
-      }
-      
-    }
-    if(player.isTouchingGhost())
-    {
-      exit();
-    }
+      }      
+    }    
   }
+  
 }

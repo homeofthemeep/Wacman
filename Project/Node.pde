@@ -3,6 +3,7 @@ public class Node extends RectCollision
   public boolean[] bools;
   public Node[] neighbors;
   
+  //CONSTRUCTOR
   public Node(int x, int y, int w, int h, boolean a, boolean b, boolean c, boolean d)
   {
     super(x,y,w,h);
@@ -20,10 +21,11 @@ public class Node extends RectCollision
     for(int i = 0; i < bools.length; i++)
     {
       bools[i] = false;
-    }
-    
+    }    
   }
-  public void setNeighbors(Node[] ne)
+  //END CONSTRUCTOR
+  
+  public void setNeighbors(Node[] ne)//This method sets the neighbors by passing in the hand made array of neighbors
   {
     neighbors = new Node[ne.length];
     for(int i = 0; i < neighbors.length; i++)
@@ -32,21 +34,9 @@ public class Node extends RectCollision
     }
     setValDir();
   }
-  /*
-  public void getNeighbors()
-  {
-    neighbors = new Node[ne.length];
-    for(int i = 0; i < neighbors.length; i++)
-    {
-      neighbors[i] = ne[i];
-    }
-    setValDir();
-  }
-  */
-  public void setValDir()
-  {
-    
-    
+  
+  public void setValDir() //This sets the valid directions the player can go from this node.
+  {        
     for(int i = 0; i < neighbors.length; i++)
     {
       //Node neighbor = neighbors[i];
@@ -64,7 +54,7 @@ public class Node extends RectCollision
     }
   }
   
-  public boolean isOver(RectCollision other)
+  public boolean isOver(RectCollision other) //I don't know if this ever used but it checks overlapment. Refer to Board.isOLappingNode()
   { // other = l2.x&y, r2.x&y (x1,y1)(x2,y2)
     if(this.x1 == other.x1 && other.y1 == this.y1) //this  = l1.x&y, r1.x&y (x1,y1)(x2,y2)
     {      return true;    }
@@ -74,14 +64,15 @@ public class Node extends RectCollision
     return false;
     }
   }
-  public void show()
+  
+  public void show()//Draws the node. THIS IS USUALLY NOT CALLED AS THEY ARE FOR VISUAL DEBUGGING PURPOSES.
   {
     fill(255,0,0);
     rect(super.x1,super.y1, super.w, super.h);
     fill(255);
   }
   
-  public boolean[] getDir()
+  public boolean[] getDir()//I don't know if this is used it will return the valid directions that have been setup thus far.
   {
     return bools;
   }

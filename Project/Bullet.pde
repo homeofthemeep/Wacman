@@ -2,6 +2,7 @@ public class Bullet
 {
   int x,y,bulletDir;
   RectCollision bulletBody;
+  
   public Bullet(int x, int y, int direction)
   {
     bulletBody = new RectCollision(x,y,5,5);
@@ -10,7 +11,7 @@ public class Bullet
     this.bulletDir = direction;
   }
   
-  void move()
+  void move()//Move the bullet at break-neck speeds
   {
     switch(bulletDir)
     {
@@ -29,24 +30,13 @@ public class Bullet
     fill(255);
   }
   
-  void updateBullet()
+  void updateBullet() //If the bullet hits a wall set the sucker to null
   {
-    /*
-    int checker = ghost.isHit();
-    if(checker!=-1)
-    {
-      bList.get(checker).bulletBody = null;
-      bList.set(checker, null);
-    }
-    */
-    
     int checker = board.isBulletTouchingWall(); //returns the index of the bullet that hits the wall
     if(checker!=-1 && bList.size()>0)
     {
       bList.set(checker, null);
     } 
   }
-  
-  
-  
+      
 }

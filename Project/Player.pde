@@ -1,6 +1,7 @@
 public class Player
 {
   public int x, y, direction, storedDir, score, ammo;
+  public boolean isAlive;
   
   public Node curNode, prevNode, targetNode;
   RectCollision body;
@@ -9,6 +10,7 @@ public class Player
   //CONSTRUCTOR
   public Player(int x, int y, int wCol, int hCol)
   {
+    isAlive = true;
     body = new RectCollision(width/2, height/2, wCol-1, hCol-1);
     this.x = x; this.y = y;  
     direction = 2;
@@ -17,26 +19,10 @@ public class Player
     changePos(direction);
   }
   //END CONSTUCTOR
-  
-  
-  
-  //SHOW
-  void show()  {    rect(this.x, this.y, 49, 49);          }
-  //END SHOW
-  
-  //Start out on this node:
-  public void getFirstNode()
-  {
-    Node temp = getNodeAtPos();
-    if(temp != null)    {      curNode = temp; curNode.setNeighbors(temp.neighbors);    }
-    else                {      curNode = board.nList[5];    }
-    //changePos(direction);
-  }
-  
-  
-  
-  //Check which node the player is at in global space,
-  public Node getNodeAtPos()
+        
+  void show()  {    rect(this.x, this.y, 49, 49);          }//SHOW
+          
+  public Node getNodeAtPos()//Check which node the player is at in global space,
   {
     int checker = board.isOLappingNode();
     if(checker != -1)
@@ -46,7 +32,7 @@ public class Player
     return null;
   }
   
-  public void changePos(int dir)
+  public void changePos(int dir) //This method is responsible for storing a new direction if inputed 
   {
     if(dir != direction)  {storedDir = dir;}
     
@@ -68,135 +54,87 @@ public class Player
     }
   }
   
-  public void move()
+  public void move() //This method combines node-neighbor movement with 2d collision movement to get wacman to move correctly
   {
-    if (curNode != null)
+    isAlive = !isTouchingGhost();
+    
+    if(isAlive) //Check to see if wacman is alive
     {
-      Node moveToNode = canMove(storedDir);
-      if(moveToNode != null)
+      if (curNode != null)
       {
-          direction = storedDir;
-          targetNode = moveToNode;
-          prevNode = curNode;
-          curNode = null;
-      }
-      if(frameCount%2 == 0)
-      switch(direction)
+        Node moveToNode = canMove(storedDir);
+        if(moveToNode != null)
+        {
+            direction = storedDir;
+            targetNode = moveToNode;
+            prevNode = curNode;
+            curNode = null;
+        }
+        if(frameCount%2 == 0)
+        switch(direction)
+        {
+          case 0: y-=5; break;
+          case 1: y+=5; break;
+          case 2: x-=5; break;
+          case 3: x+=5; break;
+        }
+        body.updateCol(x,y);
+      }//This if branch makes wacman move, practically magic, I have no idea how I got this working...
+      
+      else
       {
-        case 0: y-=5; break;
-        case 1: y+=5; break;
-        case 2: x-=5; break;
-        case 3: x+=5; break;
-      }
-      body.updateCol(x,y);
-    }
-    /*else
-    {
-      Node moveToNode = canMove(storedDir);
-      if(moveToNode != null)
+        Node moveToNode = canMove(storedDir);
+        if(moveToNode != null)
+        {
+            direction = storedDir;
+            targetNode = moveToNode;
+            prevNode = curNode;
+            curNode = null;
+        }
+        if(frameCount%2 == 0)
+        switch(direction)
+        {
+          case 0: y-=5; break;
+          case 1: y+=5; break;
+          case 2: x-=5; break;
+          case 3: x+=5; break;
+        }
+        body.updateCol(x,y);        
+      }//More magic
+      
+      if(board.isTouchingWall())
       {
-          direction = storedDir;
-          targetNode = moveToNode;
-          prevNode = curNode;
-          curNode = null;
-      }
-      if(frameCount%2 == 0)
-      switch(direction)
-      {
-        case 0: y-=5; break;
-        case 1: y+=5; break;
-        case 2: x-=5; break;
-        case 3: x+=5; break;
-      }
-      body.updateCol(x,y);
+        if(frameCount%2 == 0)
+        switch(direction)
+        {
+          case 0: y+=5; break;
+          case 1: y-=5; break;
+          case 2: x+=5; break;
+          case 3: x-=5; break;
+        }
+        body.updateCol(x,y);
+      }//if player is colliding with a wall push them back
       
     }
-    */
-    if (targetNode != curNode && targetNode != null)
-    {
-      if(frameCount%2 == 0)
-      switch(direction)
-      {
-        case 0: y-=5; break;
-        case 1: y+=5; break;
-        case 2: x-=5; break;
-        case 3: x+=5; break;
-      }
-      body.updateCol(x,y);
-    }
-    
-    if(board.isTouchingWall())
-    {
-      //System.out.println(board.isTouchingWall());
-      if(frameCount%2 == 0)
-      switch(direction)
-      {
-        case 0: y+=5; break;
-        case 1: y-=5; break;
-        case 2: x+=5; break;
-        case 3: x-=5; break;
-      }
-      body.updateCol(x,y);
-    }
   }
   
-  //THIS MOVES THE CHARACTER TO ONE OF THE POSSIBLE NEIGHBORING NODES  
-  public void moveToNode(int dir)
-  {
-    Node moveToNode = canMove(dir);
-    if(moveToNode != null)  
-    {
-      player.x = moveToNode.x1;
-      player.y = moveToNode.y1; 
-      body.updateCol(x,y); 
-      curNode = moveToNode;
-      direction = dir;
-      System.out.println("Player @ ("+ player.x + ", "+ player.y + ")");
-    }
-  }
   //THIS METHOD SUPPLEMENTS "void moveToNode(int dir)"
-  public Node canMove(int dir)
+  public Node canMove(int dir)//Reuturns a valid node that the player wants to move to that is a neighbor from the player's current node. Returns null if there is no valid node in that direction
   {
     Node moveToNode = null;        
+    if(curNode != null)
     for(int i = 0; i < curNode.neighbors.length; i++)
     {
       if(curNode.bools[i] == true && i == dir)  {  moveToNode = curNode.neighbors[i];  break;  }
     }
     return moveToNode;    
   }
-  /*
-  public Node canMove(int dir)
-  {
-    Node moveToNode = null;        
-    for(int i = 0; i < curNode.neighbors.length; i++)
-    {
-      if(curNode.bools[i] == true && i == dir)  {  moveToNode = curNode.neighbors[i];  break;  }
-    }
-    return moveToNode;    
-  }
-  */
-  // THIS METHOD WILL FIND OUT IF THE PLAYER HAS OVERSHOT THE TARGET NODE THY WERE GOING TO
-  public boolean overShotTarget()
-  {
-    float nodeToTarget = lengthFromNode (targetNode.x1, targetNode.y1);
-    float nodeToSelf = lengthFromNode (player.x, player.y);
-  
-    return nodeToSelf > nodeToTarget;
-  }
-  //THIS METHOD FINDS OUT THE LENGTH BEWTEEN THE PREVIOUS NODE AND THE TARGET POSITION OF THE NEXT NODE
-  public float lengthFromNode (int x, int y)
-  {
-    int tempX = x - prevNode.x1;
-    int tempY = y - prevNode.y1;
     
-    return sqrt(abs(sq(tempX)+sq(tempY)));
-  }
-  
-  boolean isTouchingGhost()
+  public boolean isTouchingGhost()//Check to see if player's center point is colliding with a ghost
   {
     for(int i =0; i<gList.length; i++)
     {
-      if(gList[i]!=null && gList[i].body.isColliding(new RectCollision(player.body.x1+25, player.body.y1+25, 1, 1)))
+      if(gList[i]!=null && gList[i].body.isColliding(new RectCollision(player.body.x1+25, player.body.y1+25, 0, 0)))
       {
         return true;
       }
