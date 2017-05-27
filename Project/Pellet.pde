@@ -6,6 +6,9 @@ public class Pellet extends RectCollision
     super(superX,superY,w,h);
     this.x = x; this.y = y;
   }
+  
+  
+  
   public void show()
   {
     

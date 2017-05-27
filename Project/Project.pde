@@ -22,12 +22,12 @@ void setup()
 
 void draw()
 {
-  background(51);
-  board.show();
+  background(51);  
   player.curNode = player.getNodeAtPos();
   player.move();
+  board.updatePellet();
+  board.show();
   player.show(); 
-  
 }
 
 void keyPressed()

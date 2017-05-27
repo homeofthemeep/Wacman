@@ -206,6 +206,17 @@ public class Board
     }
   }
   
+  public void updatePellet()
+  {
+    int checker = isTouchingPellet();
+    
+    if(checker != -1)
+    {
+      pList[checker] = null;
+      player.score++;
+    }
+  }
+  
   public boolean isTouchingWall()
   {
     for(int i = 0; i < colList.length; i++)
@@ -216,6 +227,18 @@ public class Board
       }
     }
     return false;
+  }
+  
+  public int isTouchingPellet()
+  {
+    for(int i = 0; i < pList.length; i++)
+    {
+      if(pList[i] != null && player.body.isColliding(pList[i]))
+      {
+        return i;
+      }
+    }
+    return -1;
   }
   
   public int isOLappingNode()

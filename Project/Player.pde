@@ -1,6 +1,6 @@
 public class Player
 {
-  public int x, y, direction, storedDir;
+  public int x, y, direction, storedDir, score;
   
   public Node curNode, prevNode, targetNode;
   RectCollision body;
@@ -13,6 +13,7 @@ public class Player
     this.x = x; this.y = y;  
     direction = 2;
     storedDir = 2;
+    score = 0;
     changePos(direction);
   }
   //END CONSTUCTOR
