@@ -65,30 +65,37 @@ public class Ghost
   {
     
     
-    if(iter == 0)
+    if(iter == 0 && gList[iter] == null)
     {
       gList[iter] = new Ghost(board.nList[5].x1, board.nList[5].y1, 50, 50, new boolean[]{true, false, false, false});
       curNode = board.nList[5];
       iter++; return;
     }
-    if(iter == 1)
+    else if(gList[iter] != null)  {iter++; return;}
+    
+    if(iter == 1 && gList[iter] == null)
     {
       gList[iter] = new Ghost(board.nList[6].x1, board.nList[6].y1, 50, 50, new boolean[]{false, true, false, false});
       curNode = board.nList[6];
       iter++; return;
     }
-    if(iter == 2)
+    else if(gList[iter] != null)  {iter++; return;}
+    
+    if(iter == 2 && gList[iter] == null)
     {
       gList[iter] = new Ghost(board.nList[23].x1, board.nList[23].y1, 50, 50, new boolean[]{false, false, true, false});
       curNode = board.nList[23];
       iter++; return;
     }
-    if(iter == 3)
+    else if(gList[iter] != null)  {iter++; return;}
+    
+    if(iter == 3 && gList[iter] == null)
     {
       gList[iter] = new Ghost(board.nList[25].x1, board.nList[25].y1, 50, 50, new boolean[]{false, false, false, true});
       curNode = board.nList[25];
       iter = 0; return;
     }
+    else if(gList[iter] != null)  {iter=0; return;}
     
   }
   
