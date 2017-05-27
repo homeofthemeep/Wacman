@@ -28,6 +28,7 @@ void draw()
   board.updatePellet();
   board.show();
   player.show(); 
+  System.out.println(player.score +" " + player.ammo);
 }
 
 void keyPressed()

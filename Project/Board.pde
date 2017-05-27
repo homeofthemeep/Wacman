@@ -118,8 +118,15 @@ public class Board
     x = y = 21;
     for(int i = 0; i < 10; i++)
     {
-      pList[i] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2-350)+y, 8,8);
-    }    
+      x=y=14;
+      if(i==0 || i==9)
+      {
+        pList[i] = new BigPellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2-350)+y, 22,22);
+        x=y=21;
+      }
+      else
+        pList[i] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2-350)+y, 8,8);
+    }
     for(int i = 0; i < 10; i++)
     {
       if(i != 1 && i != 3 && i != 4 && i != 5 && i != 6 && i != 8)
@@ -178,7 +185,14 @@ public class Board
     }
     for(int i = 0; i < 10; i++)
     {
-      pList[i+130] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2+300)+y, 8,8);
+      x=y=14;
+      if(i==0 || i==9)
+      {
+        pList[i+130] = new BigPellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2+300)+y, 22,22);
+        x=y=21;
+      }
+      else
+        pList[i+130] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2+300)+y, 8,8);
     }
   }
   
@@ -212,8 +226,18 @@ public class Board
     
     if(checker != -1)
     {
-      pList[checker] = null;
-      player.score++;
+      if(checker==0 || checker==9 || checker == 130 || checker ==139)
+      {
+        pList[checker] = null;
+        player.score+=10;
+        player.ammo+=5;
+      }
+      else
+      {
+        pList[checker] = null;
+        player.score++;
+        player.ammo+=1;
+      }
     }
   }
   
