@@ -172,5 +172,9 @@ public class Ghost
       }
       
     }
+    if(player.isTouchingGhost())
+    {
+      exit();
+    }
   }
 }

@@ -169,4 +169,17 @@ public class Player
     
     return sqrt(abs(sq(tempX)+sq(tempY)));
   }
+  
+  boolean isTouchingGhost()
+  {
+    for(int i =0; i<gList.length; i++)
+    {
+      if(gList[i]!=null && gList[i].body.isColliding(player.body))
+      {
+        return true;
+      }
+    }
+    return false;
+    
+  }
 }
