@@ -102,7 +102,7 @@ public class Board
     nList[18].setNeighbors(new Node[]{null, nList[22], nList[17], null});
     
     nList[19].setNeighbors(new Node[]{nList[14], nList[26], null, nList[20]});//Neighboring nodes from 5th line
-    nList[20].setNeighbors(new Node[]{nList[20], null, nList[19], nList[21]});
+    nList[20].setNeighbors(new Node[]{nList[16], null, nList[19], nList[21]});
     nList[21].setNeighbors(new Node[]{null, nList[24], nList[20], nList[22]});
     nList[22].setNeighbors(new Node[]{nList[18], nList[29], nList[21], null});
     
@@ -251,6 +251,21 @@ public class Board
       }
     }
     return false;
+  }
+  
+  public int isBulletTouchingWall()
+  {
+    for(int i = 0; i < colList.length; i++)
+    {
+      for(int z = 0; z<bList.size(); z++)
+      {
+        if(colList[i] != null && bList.get(z)!=null&& bList.get(z).bulletBody.isColliding(colList[i]))
+        {  
+          return z;
+        }
+      }
+    }
+    return -1;
   }
   
   public int isTouchingPellet()
