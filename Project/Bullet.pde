@@ -14,10 +14,10 @@ public class Bullet
   {
     switch(bulletDir)
     {
-      case 0: y-=10;break;
-      case 1: y+=10;break;
-      case 2: x-=10;break;
-      case 3: x+=10;break;
+      case 0: y-=20;break;
+      case 1: y+=20;break;
+      case 2: x-=20;break;
+      case 3: x+=20;break;
     }
     bulletBody.updateCol(x,y);
     

@@ -90,6 +90,28 @@ public class Player
       }
       body.updateCol(x,y);
     }
+    /*else
+    {
+      Node moveToNode = canMove(storedDir);
+      if(moveToNode != null)
+      {
+          direction = storedDir;
+          targetNode = moveToNode;
+          prevNode = curNode;
+          curNode = null;
+      }
+      if(frameCount%2 == 0)
+      switch(direction)
+      {
+        case 0: y-=5; break;
+        case 1: y+=5; break;
+        case 2: x-=5; break;
+        case 3: x+=5; break;
+      }
+      body.updateCol(x,y);
+      
+    }
+    */
     if (targetNode != curNode && targetNode != null)
     {
       if(frameCount%2 == 0)
@@ -174,7 +196,7 @@ public class Player
   {
     for(int i =0; i<gList.length; i++)
     {
-      if(gList[i]!=null && gList[i].body.isColliding(player.body))
+      if(gList[i]!=null && gList[i].body.isColliding(new RectCollision(player.body.x1+25, player.body.y1+25, 1, 1)))
       {
         return true;
       }
