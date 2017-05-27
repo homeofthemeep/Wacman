@@ -31,8 +31,17 @@ public class Bullet
   
   void updateBullet()
   {
-   int checker = board.isBulletTouchingWall(); //returns the index of the bullet that hits the wall
-   if(checker!=-1 && bList.size()>0)
+    /*
+    int checker = ghost.isHit();
+    if(checker!=-1)
+    {
+      bList.get(checker).bulletBody = null;
+      bList.set(checker, null);
+    }
+    */
+    
+    int checker = board.isBulletTouchingWall(); //returns the index of the bullet that hits the wall
+    if(checker!=-1 && bList.size()>0)
     {
       bList.set(checker, null);
     } 

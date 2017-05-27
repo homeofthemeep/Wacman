@@ -1,19 +1,24 @@
 public Board board;
 public Ghost ghost;
 public Player player;
+public Ghost[] gList;
 
 int direction;
+int ghostCounter;
 boolean checkRelease;
 ArrayList<Bullet> bList;
 void setup()
 { 
   checkRelease = true;
   direction = 2;
+  ghostCounter = 0;
   bList = new ArrayList<Bullet>();
   board  = new Board();
   player = new Player(board.nList[16].x1,board.nList[16].y1,50,50);
   
   player.getFirstNode();
+  ghost = new Ghost();
+  gList = new Ghost[4];
   
   background(51);
   fullScreen();
@@ -26,9 +31,8 @@ void draw()
   player.curNode = player.getNodeAtPos();
   player.move();
   board.updatePellet();
+  ghost.updateGhost();
   board.show();
-  player.show(); 
-  System.out.println(player.score +" " + player.ammo);
   for(int i=0; i<bList.size(); i++)
   {
     if(bList.get(i)!=null)
@@ -38,6 +42,14 @@ void draw()
       bList.get(i).updateBullet();
     }  
   }
+  if(frameCount % 300 == 0 && ghostCounter < 4)  {    ghost.spawn();  ghostCounter++;}
+  
+  for(int i = 0; i < gList.length; i++)    if(gList[i] != null)    {      gList[i].curNode = gList[i].getNodeAtPos(i);  gList[i].move(); gList[i].show();    }  
+  
+  player.show(); 
+  //System.out.println(player.score +" " + player.ammo);
+  
+  
 }
 
 void keyPressed()

@@ -253,6 +253,21 @@ public class Board
     return false;
   }
   
+  public boolean isGhostTouchingWall()
+  {
+    for(int i = 0; i < colList.length; i++)
+    {
+      for(int z = 0; z< gList.length; z++)
+      {
+        if(colList[i] != null && gList[z] !=null && gList[z].body.isColliding(colList[i]))
+        {  
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  
   public int isBulletTouchingWall()
   {
     for(int i = 0; i < colList.length; i++)
@@ -267,6 +282,8 @@ public class Board
     }
     return -1;
   }
+  
+  
   
   public int isTouchingPellet()
   {
@@ -285,6 +302,18 @@ public class Board
     for(int i = 0; i < nList.length; i++)
     {
       if(nList[i] != null && nList[i].x1 == player.x && nList[i].y1 == player.y)//NullPointer expection
+      {
+        return i;
+      }
+    }
+    return -1;
+  }
+  
+  public int isGOLappingNode(int z)
+  {
+    for(int i = 0; i < nList.length; i++)
+    {
+      if(nList[i] != null && nList[i].x1 == gList[z].x && nList[i].y1 == gList[z].y)//NullPointer expection
       {
         return i;
       }
