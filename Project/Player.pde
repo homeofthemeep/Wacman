@@ -22,10 +22,10 @@ public class Player
           
   public Node getNodeAtPos()//Check which node the player is at in global space,
   {
-    int checker = board.isOLappingNode();
-    if(checker != -1)
+    int[] checker = board.isOLappingNode();
+    if(checker != new int[]{-1,-1})
     {
-      return board.nList[checker];
+      return board.nList[checker[0]][checker[1]];
     }
     return null;
   }

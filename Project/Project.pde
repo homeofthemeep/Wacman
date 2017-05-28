@@ -23,7 +23,7 @@ void setup() // Pretty sure this is the entry point
   
   bList = new ArrayList<Bullet>();
   board  = new Board();
-  player = new Player(board.nList[16].x1,board.nList[16].y1,50,50); // Places the player in the near center of the board, on a node.
+  player = new Player(board.nList[7][5].x1,board.nList[7][5].y1,50,50); // Places the player in the near center of the board, on a node.
   
   ghost = new Ghost();
   gList = new Ghost[4];
