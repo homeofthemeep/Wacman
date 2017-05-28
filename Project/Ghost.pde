@@ -17,19 +17,19 @@ public class Ghost
     direction = (int)random(0, 4);
     if(types[0])
     {
-      idle = new GhostAnim("blinky_big_anim", 2);
+      idle = new Animation("Wacman/blinky_big_anim", 2);
     }
     if(types[1])
     {
-      idle = new GhostAnim("pinky_big_anim", 2);
+      idle = new Animation("Wacman/pinky_big_anim", 2);
     }
     if(types[2])
     {
-      idle = new GhostAnim("inky_big_anim", 2);
+      idle = new Animation("Wacman/inky_big_anim", 2);
     }
     if(types[3])
     {
-      idle = new GhostAnim("clyde_big_anim", 2);
+      idle = new Animation("Wacman/clyde_big_anim", 2);
     }
   }
   
@@ -42,22 +42,33 @@ public class Ghost
   {
     if(types[0] == true) //Blinky
     {
+      /*
+      fill(255,0,0);
+      rect(x,y,49,49);
+      fill(255);
+      */
       idle.display(x-3,y+1);
     }
     
     if(types[1] == true) //Pinky
     {
-      idle.display(x-3,y+1);
+      fill(255,192,192);
+      rect(x,y,49,49);
+      fill(255);
     }
     
     if(types[2] == true) //Inky
     {
-      idle.display(x-3,y+1);
+      fill(0,255,255);
+      rect(x,y,49,49);
+      fill(255);
     }
     
     if(types[3] == true) //Clyde
     {
-      idle.display(x-3,y+1);
+      fill(255,170,0);
+      rect(x,y,49,49);
+      fill(255);
     }   
   }
   
@@ -74,7 +85,6 @@ public class Ghost
   void spawn() //This method spawns ghost of different types in different places
   {    
     //The method uses a var called iter to loop through the ghosts that are alive and not spawned
-    if(iter>=4){iter--;}
     if(iter == 0 && gList[iter] == null)
     {
       gList[iter] = new Ghost(board.nList[5].x1, board.nList[5].y1, 50, 50, new boolean[]{true, false, false, false}); //Spawns Blinky's

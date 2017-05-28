@@ -9,7 +9,7 @@ class Animation {
 
     for (int i = 0; i < imageCount; i++) {
       // Use nf() to number format 'i' into four digits
-      String filename = imagePrefix + nf(i+1, 1) + ".png";
+      String filename = imagePrefix + nf(i+1, 4) + ".png";
       images[i] = loadImage(filename);
     }
   }
@@ -21,30 +21,5 @@ class Animation {
   
   int getWidth() {
     return images[0].width;
-  }
-}
-
-class GhostAnim extends Animation
-{
-  GhostAnim(String imagePrefix, int count)
-  {
-    super(imagePrefix, count);
-    super.frame = 0;
-  }
-  
-  void display(float xpos, float ypos) {
-    if(super.frame < 30)
-    {
-      image(images[0], xpos, ypos); frame++;
-    }
-    else
-    {
-      image(images[1], xpos, ypos); frame++;
-    }
-    if(super.frame > 60)
-    {
-      frame = 0;
-    }
-    
   }
 }
