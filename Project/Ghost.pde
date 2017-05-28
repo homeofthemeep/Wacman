@@ -63,10 +63,10 @@ public class Ghost
   
   public Node getNodeAtPos(int z)
   {
-    int checker = board.isGOLappingNode(z);
-    if(checker != -1)
+    int[] checker = board.isGOLappingNode(z);
+    if(checker != new int[]{-1,-1})
     {
-      return board.nList[checker];
+      return board.nList[checker[0]][checker[1]];
     }
     return null;
   }
@@ -77,32 +77,32 @@ public class Ghost
     if(iter>=4){iter--;}
     if(iter == 0 && gList[iter] == null)
     {
-      gList[iter] = new Ghost(board.nList[5].x1, board.nList[5].y1, 50, 50, new boolean[]{true, false, false, false}); //Spawns Blinky's
-      curNode = board.nList[5];
+      gList[iter] = new Ghost(board.nList[2][2].x1, board.nList[2][2].y1, 50, 50, new boolean[]{true, false, false, false}); //Spawns Blinky's
+      curNode = board.nList[2][2];
       iter++; return;
     }
     else if(gList[iter] != null)  {iter++; return;}
     
     if(iter == 1 && gList[iter] == null)
     {
-      gList[iter] = new Ghost(board.nList[6].x1, board.nList[6].y1, 50, 50, new boolean[]{false, true, false, false}); //Spawns Pinky's
-      curNode = board.nList[6];
+      gList[iter] = new Ghost(board.nList[2][7].x1, board.nList[2][7].y1, 50, 50, new boolean[]{false, true, false, false}); //Spawns Pinky's
+      curNode = board.nList[2][7];
       iter++; return;
     }
     else if(gList[iter] != null)  {iter++; return;}
     
     if(iter == 2 && gList[iter] == null)
     {
-      gList[iter] = new Ghost(board.nList[23].x1, board.nList[23].y1, 50, 50, new boolean[]{false, false, true, false}); //Spawns Inky's
-      curNode = board.nList[23];
+      gList[iter] = new Ghost(board.nList[11][2].x1, board.nList[11][2].y1, 50, 50, new boolean[]{false, false, true, false}); //Spawns Inky's
+      curNode = board.nList[11][2];
       iter++; return;
     }
     else if(gList[iter] != null)  {iter++; return;}
     
     if(iter == 3 && gList[iter] == null)
     {
-      gList[iter] = new Ghost(board.nList[25].x1, board.nList[25].y1, 50, 50, new boolean[]{false, false, false, true}); //Spawns Clyde's
-      curNode = board.nList[25];
+      gList[iter] = new Ghost(board.nList[11][7].x1, board.nList[11][7].y1, 50, 50, new boolean[]{false, false, false, true}); //Spawns Clyde's
+      curNode = board.nList[11][7];
       iter = 0; return;
     }
     else if(gList[iter] != null)  {iter=0; return;}
