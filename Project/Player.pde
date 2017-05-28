@@ -1,7 +1,6 @@
 public class Player
 {
   public int x, y, direction, storedDir, score, ammo;
-  public boolean isAlive;
   
   public Node curNode, prevNode, targetNode;
   RectCollision body;
@@ -10,7 +9,6 @@ public class Player
   //CONSTRUCTOR
   public Player(int x, int y, int wCol, int hCol)
   {
-    isAlive = true;
     body = new RectCollision(width/2, height/2, wCol-1, hCol-1);
     this.x = x; this.y = y;  
     direction = 2;
@@ -56,10 +54,6 @@ public class Player
   
   public void move() //This method combines node-neighbor movement with 2d collision movement to get wacman to move correctly
   {
-    isAlive = !isTouchingGhost();
-    
-    if(isAlive) //Check to see if wacman is alive
-    {
       if (curNode != null)
       {
         Node moveToNode = canMove(storedDir);
@@ -115,6 +109,10 @@ public class Player
         body.updateCol(x,y);
       }//if player is colliding with a wall push them back
       
+    if(player.isTouchingGhost())
+    {
+      gameMode=false;
+      gameOver=true;
     }
   }
   
