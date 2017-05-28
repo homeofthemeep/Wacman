@@ -5,6 +5,7 @@ public class Ghost
   public Node curNode, prevNode, targetNode; //These are the ingredients for the magic moving stuff
   public RectCollision body;
   public int iter = 0; // This is the iterator that goes over the different types of ghosts to spawn them.
+  public Animation idle;
   
   //CONSTRUCTOR
   public Ghost(int x, int y, int wCol, int hCol, boolean[] b)
@@ -14,6 +15,22 @@ public class Ghost
     types = b;
     maxHealth = 3;
     direction = (int)random(0, 4);
+    if(types[0])
+    {
+      idle = new Animation("Wacman/blinky_big_anim", 2);
+    }
+    if(types[1])
+    {
+      idle = new Animation("Wacman/pinky_big_anim", 2);
+    }
+    if(types[2])
+    {
+      idle = new Animation("Wacman/inky_big_anim", 2);
+    }
+    if(types[3])
+    {
+      idle = new Animation("Wacman/clyde_big_anim", 2);
+    }
   }
   
   public Ghost()//Empty constructor for usefully useless "ghost"
@@ -25,9 +42,12 @@ public class Ghost
   {
     if(types[0] == true) //Blinky
     {
+      /*
       fill(255,0,0);
       rect(x,y,49,49);
       fill(255);
+      */
+      idle.display(x-3,y+1);
     }
     
     if(types[1] == true) //Pinky
