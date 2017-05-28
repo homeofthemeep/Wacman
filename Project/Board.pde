@@ -9,7 +9,7 @@ public class Board
   
   public Board()
   {
-    background = loadImage("wacman_layout1.png");
+    background = loadImage("wacman_layout1_det.png");
     colList = new RectCollision[64];
     nList = new Node[64];
     pList = new Pellet[140];
@@ -129,7 +129,10 @@ public class Board
         x=y=21;
       }
       else
+      {
+        x=y=21;
         pList[i] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2-350)+y, 8,8);
+      }
     }
     for(int i = 0; i < 10; i++)
     {
@@ -196,7 +199,10 @@ public class Board
         x=y=21;
       }
       else
+      {
+        x=y=21;
         pList[i+130] = new Pellet(width/2-250 + (i*50), height/2-350, (width/2-250 + (i*50))+x, (height/2+300)+y, 8,8);
+      }
     }
     //END PELLETS
   }
