@@ -10,13 +10,13 @@ int direction; // This is the direction the player is going in if inputed.
 int ghostCounter; //This is a good workaround that allows the code to keep track of which type of ghost it is spawning.
 boolean checkRelease; //This checks to see if the keyPressed is now released. Limits inputd.
 ArrayList<Bullet> bList;//This is the ArrayList of Bullets that the player will create into the world. We don't know how many bullets the player will create so we use an ArrayList.
-boolean gameMenu, gameMode, gameOver=false;
+boolean gameMode, gameOver=false;
+boolean gameMenu=true;
 
 void setup() // Pretty sure this is the entry point
 { 
   gameMenuBackground = loadImage("wacman_mainmenu.png");
   gameOverBackground = loadImage("wacman_gameover.png");
-  gameMenu=true;
   checkRelease = true;
   direction = 2;
   ghostCounter = 0;
@@ -59,7 +59,7 @@ void draw()
           bList.remove(i);
       }  
     }
-    if(frameCount % 300 == 0 && ghostCounter < 4)  {    ghost.spawn();  ghostCounter++;} //Spawns ghost on 5 sec intervals and maxes out at 4 ghosts.
+    if(frameCount % 180 == 0 && ghostCounter < 4 && gameMode==true)  {    ghost.spawn();  ghostCounter++;} //Spawns ghost on 5 sec intervals and maxes out at 4 ghosts.
     
     for(int i = 0; i < gList.length; i++)  
     {
