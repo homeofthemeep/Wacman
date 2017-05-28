@@ -23,7 +23,7 @@ void setup() // Pretty sure this is the entry point
   
   bList = new ArrayList<Bullet>();
   board  = new Board();
-  player = new Player(board.nList[7][5].x1,board.nList[7][5].y1,50,50); // Places the player in the near center of the board, on a node.
+  player = new Player(board.nList[16].x1,board.nList[16].y1,50,50); // Places the player in the near center of the board, on a node.
   
   ghost = new Ghost();
   gList = new Ghost[4];
@@ -44,6 +44,7 @@ void draw()
     player.move(); //This method moves the player.
     board.updatePellet(); //This method checks to see if any pellets are picked up by the player
     ghost.updateGhost(); //The usefully useless "ghost" calls this method. Checks to see if a bullet hits a ghost
+    
     board.show(); //Draws the board
     
     for(int i=0; i<bList.size(); i++) // Goes through the ArrayList of bullets. Moves them, updates them, then draws them.
@@ -54,11 +55,21 @@ void draw()
         bList.get(i).updateBullet();
         if(bList.get(i)!=null)//After update gotta make sure you are able to draw it
           bList.get(i).show();
+        else
+          bList.remove(i);
       }  
     }
     if(frameCount % 180 == 0 && ghostCounter < 4 && gameMode==true)  {    ghost.spawn();  ghostCounter++;} //Spawns ghost on 5 sec intervals and maxes out at 4 ghosts.
     
-    for(int i = 0; i < gList.length; i++)    if(gList[i] != null)    {      gList[i].curNode = gList[i].getNodeAtPos(i);  gList[i].move(); gList[i].show();    }  // Goes through the array of ghosts. Update their current nodes, moves them, then draws them.
+    for(int i = 0; i < gList.length; i++)  
+    {
+      if(gList[i] != null)    
+      {  
+        gList[i].curNode = gList[i].getNodeAtPos(i);  
+        gList[i].move(); 
+        gList[i].show();
+      }  // Goes through the array of ghosts. Update their current nodes, moves them, then draws them.
+    }
     
     player.show();  //Draws the player.
    }

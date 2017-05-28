@@ -1,7 +1,7 @@
 public class Player
 {
   public int x, y, direction, storedDir, score, ammo;
-  
+  public GhostAnim idle;
   public Node curNode, prevNode, targetNode;
   RectCollision body;
   
@@ -10,6 +10,7 @@ public class Player
   public Player(int x, int y, int wCol, int hCol)
   {
     body = new RectCollision(width/2, height/2, wCol-1, hCol-1);
+    idle = new GhostAnim("wacman_big_anim", 2);
     this.x = x; this.y = y;  
     direction = 2;
     storedDir = 2;
@@ -18,14 +19,14 @@ public class Player
   }
   //END CONSTUCTOR
         
-  void show()  {    rect(this.x, this.y, 49, 49);          }//SHOW
+  void show()  {    idle.display(this.x, this.y);          }//SHOW
           
   public Node getNodeAtPos()//Check which node the player is at in global space,
   {
-    int[] checker = board.isOLappingNode();
-    if(checker != new int[]{-1,-1})
+    int checker = board.isOLappingNode();
+    if(checker != -1)
     {
-      return board.nList[checker[0]][checker[1]];
+      return board.nList[checker];
     }
     return null;
   }
