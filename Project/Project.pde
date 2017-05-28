@@ -3,8 +3,8 @@ public Ghost ghost; // This is a special ghost that will call relatively importa
 public Player player; // This  is the player. I mean it's a  game right? You got to want to play it? Why am I explaining this!?!?!?
 public Ghost[] gList; // This is the list of ghosts that will in the game serving as enemies to the player.
 
-PImage gameOverBackground = loadImage("wacman_mainmenu");
-PImage gameMenuBackground = loadImage("wacman_mainmenu");
+PImage gameOverBackground;
+PImage gameMenuBackground;
 
 int direction; // This is the direction the player is going in if inputed. 
 int ghostCounter; //This is a good workaround that allows the code to keep track of which type of ghost it is spawning.
@@ -14,6 +14,8 @@ boolean gameMenu, gameMode, gameOver=false;
 
 void setup() // Pretty sure this is the entry point
 { 
+  gameMenuBackground = loadImage("wacman_mainmenu.png");
+  gameOverBackground = loadImage("wacman_gameover.png");
   gameMenu=true;
   checkRelease = true;
   direction = 2;
@@ -34,10 +36,10 @@ void setup() // Pretty sure this is the entry point
 void draw()
 {
   background(51);
-  //if(gameMenu==true)  image(gameMenuBackground,0,0);
+  if(gameMenu==true)  image(gameMenuBackground,0,0);
     
-  //if(gameMode==true)
-  //{
+  if(gameMode==true)
+  {
     player.curNode = player.getNodeAtPos(); // I could put this in a new player method but this works fine. Constantly checks if the player is at a node and setting it.
     player.move(); //This method moves the player.
     board.updatePellet(); //This method checks to see if any pellets are picked up by the player
@@ -59,8 +61,8 @@ void draw()
     for(int i = 0; i < gList.length; i++)    if(gList[i] != null)    {      gList[i].curNode = gList[i].getNodeAtPos(i);  gList[i].move(); gList[i].show();    }  // Goes through the array of ghosts. Update their current nodes, moves them, then draws them.
     
     player.show();  //Draws the player.
-  //}
-   //if(gameOver==true)  image(gameOverBackground,0,0);
+   }
+   if(gameOver==true)  image(gameOverBackground,0,0);
   
   
 }
@@ -82,17 +84,16 @@ void keyReleased()//This method is responsible for making sure checkRelease work
   if(key=='d') {checkRelease = true;}
   if(key=='k') {checkRelease = true;}
 }
-/*
+
 void mouseClicked()
 {
+  
   //mainmenu workers
-  /*
-  if(mouseX>top left && mouseX<top right && mouseY> top left && mouseY<bottom left && gameMenu==true) {  gameMenu==false;  gameMode==true; gameOver==false; } //play button
-  if(mouseX>top left && mouseX<top right && mouseY> top left && mouseY<bottom left) && gameMenu == true) { exit(); } //exit
+  if(mouseX> 1040 && mouseX<1840 && mouseY> 300 && mouseY<400 && gameMenu==true) {  gameMenu=false;  gameMode=true; gameOver=false; } //play button
+  if(mouseX> 1040 && mouseX<1840 && mouseY> 500 && mouseY<600 && gameMenu==true) { exit(); } //exit
   
   //gameover workers
-  if(mouseX>top left && mouseX<top right && mouseY> top left && mouseY<bottom left && gameMenu==true) {  gameMenu==false;  gameMode==true; gameOver==false;} //play button
-  if(mouseX>top left && mouseX<top right && mouseY> top left && mouseY<bottom left && gameOver==true) {  gameMenu==true;  gameMode==false; gameOver==false; } //menu button
+  if(mouseX> 1040 && mouseX<1840 && mouseY> 300 && mouseY<400 && gameOver==true) {  gameMenu=false;  gameMode=true; gameOver=false;} //play button
+  if(mouseX> 1040 && mouseX<1840 && mouseY> 500 && mouseY<600 && gameOver==true) {  gameMenu=true;  gameMode=false; gameOver=false; } //menu button
  
 }
-*/
