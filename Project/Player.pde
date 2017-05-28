@@ -111,6 +111,7 @@ public class Player
       
     if(player.isTouchingGhost())
     {
+      setup();
       gameMode=false;
       gameOver=true;
     }
