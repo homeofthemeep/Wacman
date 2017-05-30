@@ -13,7 +13,7 @@ public class Ghost
     body = new RectCollision(width/2, height/2, wCol-1, hCol-1);
     this.x = x; this.y = y;  
     types = b;
-    maxHealth = 3;
+    maxHealth = 1;
     direction = (int)random(0, 4);
     if(types[0])
     {

@@ -242,7 +242,7 @@ public class Board
         
         pList[checker] = null;
         player.score+=10;
-        player.ammo+=9;
+        player.ammo+=3;
       }
       else
       {

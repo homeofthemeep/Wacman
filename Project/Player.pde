@@ -15,7 +15,7 @@ public class Player
     direction = 2;
     storedDir = 2;
     score = 0;
-    ammo = 6;
+    ammo = 2;
     changePos(direction);
   }
   //END CONSTUCTOR

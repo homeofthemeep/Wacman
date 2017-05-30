@@ -99,7 +99,7 @@ void keyPressed() //W,A,S,D movement. K is shoot. You can only shoot in the dire
   if(key=='s' && checkRelease) {direction = 1;  player.changePos(direction); checkRelease = false;}
   if(key=='a' && checkRelease) {direction = 2;  player.changePos(direction); checkRelease = false;}
   if(key=='d' && checkRelease) {direction = 3;  player.changePos(direction); checkRelease = false;}  
-  if(key=='k' && checkRelease) if(player.ammo>0){bList.add(new Bullet(player.x+25, player.y+25, player.direction)); player.ammo-=1;checkRelease=false; shoot.play();}
+  if(key=='k' && checkRelease) if(player.ammo>0){bList.add(new Bullet(player.x+25, player.y+25, direction)); player.ammo-=1;checkRelease=false; shoot.play();}
 }
 
 void keyReleased()//This method is responsible for making sure checkRelease works as intended and limits inputs.
