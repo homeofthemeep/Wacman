@@ -239,6 +239,7 @@ public class Board
     {
       if(checker==0 || checker==9 || checker == 130 || checker ==139)
       {
+        
         pList[checker] = null;
         player.score+=10;
         player.ammo+=9;
@@ -248,6 +249,7 @@ public class Board
         pList[checker] = null;
         player.score++;
       }
+      wacka.play();
     }
   }
   

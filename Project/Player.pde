@@ -113,6 +113,7 @@ public class Player
       
     if(player.isTouchingGhost())
     {
+      meDed.play();
       sboard.saveHighScore();
       setup();
       gameMode=false;

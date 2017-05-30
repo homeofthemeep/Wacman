@@ -25,8 +25,8 @@ public class Bullet
   }
   void show()
   {
-    fill(101,101,101);
-    ellipse(x,y, 5, 5);
+    fill(0,255,0);
+    ellipse(x,y, 8, 8);
     fill(255);
   }
   

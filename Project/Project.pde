@@ -1,8 +1,11 @@
+import processing.sound.*;
+
 public Board board; // The board the game will be played on. The layout image can be found inside Board class.
 public Ghost ghost; // This is a special ghost that will call relatively important stuff for all ghosts. This ghost is never put in the game.
 public Player player; // This  is the player. I mean it's a  game right? You got to want to play it? Why am I explaining this!?!?!?
 public Ghost[] gList; // This is the list of ghosts that will in the game serving as enemies to the player.
 public Scoreboard sboard;
+public SoundFile shoot, wacka, gDed, meDed;
 PImage gameOverBackground;
 PImage gameMenuBackground;
 
@@ -16,6 +19,11 @@ boolean gameMenu=true;
 
 void setup() // Pretty sure this is the entry point
 { 
+  shoot = new SoundFile(this, "shoot.wav");
+  wacka = new SoundFile(this, "dc.wav");
+  gDed  = new SoundFile(this, "tri.wav");
+  meDed = new SoundFile(this, "tri.wav");
+  
   gameMenuBackground = loadImage("/data/images/wacman_mainmenu.png");
   gameOverBackground = loadImage("/data/images/wacman_gameover.png");
   checkRelease = true;
@@ -91,7 +99,7 @@ void keyPressed() //W,A,S,D movement. K is shoot. You can only shoot in the dire
   if(key=='s' && checkRelease) {direction = 1;  player.changePos(direction); checkRelease = false;}
   if(key=='a' && checkRelease) {direction = 2;  player.changePos(direction); checkRelease = false;}
   if(key=='d' && checkRelease) {direction = 3;  player.changePos(direction); checkRelease = false;}  
-  if(key=='k' && checkRelease) if(player.ammo>0){bList.add(new Bullet(player.x+25, player.y+25, player.direction)); player.ammo-=1;checkRelease=false;}
+  if(key=='k' && checkRelease) if(player.ammo>0){bList.add(new Bullet(player.x+25, player.y+25, player.direction)); player.ammo-=1;checkRelease=false; shoot.play();}
 }
 
 void keyReleased()//This method is responsible for making sure checkRelease works as intended and limits inputs.

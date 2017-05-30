@@ -185,6 +185,7 @@ public class Ghost
         gList[checker] = null;
         ghostCounter--;
         player.score+=20;
+        gDed.play();
       }      
     }    
   }
