@@ -9,6 +9,7 @@ public SoundFile shoot, wacka, gDed, meDed;
 PImage gameOverBackground;
 PImage gameMenuBackground;
 
+public Pellet lastpellet;
 int framers;
 int direction; // This is the direction the player is going in if inputed. 
 int ghostCounter; //This is a good workaround that allows the code to keep track of which type of ghost it is spawning.
@@ -111,7 +112,7 @@ void draw()
       }  // Goes through the array of ghosts. Update their current nodes, moves them, then draws them.
       
     }
-    
+    if(!board.ifWin())
     player.show();  //Draws the player.
     sboard.show();
     framers++;
@@ -119,14 +120,7 @@ void draw()
    }
    if(board.ifWin())
     {
-     switch(direction)
-      {
-        case 0: player.y-=50; break;
-        case 1: player.y+=50; break;
-        case 2: player.x-=50; break;
-        case 3: player.x+=50; break;
-      }
-      player.show();
+      player.idle.display(lastpellet.x,lastpellet.y);
       delay(1000);
       gDed.play();
       delay(500);

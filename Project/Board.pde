@@ -236,7 +236,10 @@ public class Board
     for(int i = 0; i < pList.length; i++)
     {
       if(pList[i]!=null)
+      {
+        lastpellet = pList[i];
         return false;     
+      }
     }
     return true;
   }
