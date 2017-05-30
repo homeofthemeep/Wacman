@@ -1,7 +1,7 @@
 public class Player
 {
   public int x, y, direction, storedDir, score, ammo;
-  public GhostAnim idle;
+  public PlayerAnim idle;
   public Node curNode, prevNode, targetNode;
   RectCollision body;
   
@@ -10,11 +10,12 @@ public class Player
   public Player(int x, int y, int wCol, int hCol)
   {
     body = new RectCollision(width/2, height/2, wCol-1, hCol-1);
-    idle = new GhostAnim("wacman_big_anim", 2);
+    idle = new PlayerAnim("wacman2_big_anim", 4);
     this.x = x; this.y = y;  
     direction = 2;
     storedDir = 2;
     score = 0;
+    ammo = 6;
     changePos(direction);
   }
   //END CONSTUCTOR
@@ -112,6 +113,7 @@ public class Player
       
     if(player.isTouchingGhost())
     {
+      sboard.saveHighScore();
       setup();
       gameMode=false;
       gameOver=true;

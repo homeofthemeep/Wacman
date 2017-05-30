@@ -75,6 +75,10 @@ public class Ghost
   {    
     //The method uses a var called iter to loop through the ghosts that are alive and not spawned
     if(iter>=4){iter--;}
+    if(gList[3] == null){iter = 3;}
+    if(gList[2] == null){iter = 2;}
+    if(gList[1] == null){iter = 1;}
+    if(gList[0] == null){iter = 0;}
     if(iter == 0 && gList[iter] == null)
     {
       gList[iter] = new Ghost(board.nList[5].x1, board.nList[5].y1, 50, 50, new boolean[]{true, false, false, false}); //Spawns Blinky's
@@ -107,6 +111,7 @@ public class Ghost
     }
     else if(gList[iter] != null)  {iter=0; return;}
     
+    framers = 0; 
   }
   
   public void move()//Moves the ghost in 4 different random direction, uses magic
@@ -179,6 +184,7 @@ public class Ghost
       {
         gList[checker] = null;
         ghostCounter--;
+        player.score+=20;
       }      
     }    
   }

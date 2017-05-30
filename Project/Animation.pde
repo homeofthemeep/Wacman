@@ -48,3 +48,60 @@ class GhostAnim extends Animation
     
   }
 }
+
+class PlayerAnim extends Animation
+{
+  PlayerAnim(String imagePrefix, int count)
+  {
+    super(imagePrefix, count);
+    super.frame = 0;
+  }
+  
+  void display(float xpos, float ypos) {
+    if(super.frame < 6)
+    {
+      image(images[0], xpos, ypos); frame++;
+    }
+    else if(super.frame < 12)
+    {
+      image(images[1], xpos, ypos); frame++;
+    }
+    else if(super.frame < 18)
+    {
+      image(images[0], xpos, ypos); frame++;
+    }
+    else if(super.frame < 24)
+    {
+      image(images[1], xpos, ypos); frame++;
+    }
+    else if(super.frame < 30)
+    {
+      image(images[0], xpos, ypos); frame++;
+    }
+    else if(super.frame < 36)
+    {
+      image(images[2], xpos, ypos); frame++;
+    }
+    else if(super.frame < 42)
+    {
+      image(images[3], xpos, ypos); frame++;
+    }
+    else if(super.frame < 48)
+    {
+      image(images[2], xpos, ypos); frame++;
+    }
+    else if(super.frame < 54)
+    {
+      image(images[3], xpos, ypos); frame++;
+    }
+    else if(super.frame < 60)
+    {
+      image(images[2], xpos, ypos); frame++;
+    }
+    if(super.frame > 59)
+    {
+      frame = 0;
+    }
+    
+  }
+}

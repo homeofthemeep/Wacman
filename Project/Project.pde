@@ -2,10 +2,11 @@ public Board board; // The board the game will be played on. The layout image ca
 public Ghost ghost; // This is a special ghost that will call relatively important stuff for all ghosts. This ghost is never put in the game.
 public Player player; // This  is the player. I mean it's a  game right? You got to want to play it? Why am I explaining this!?!?!?
 public Ghost[] gList; // This is the list of ghosts that will in the game serving as enemies to the player.
-
+public Scoreboard sboard;
 PImage gameOverBackground;
 PImage gameMenuBackground;
 
+int framers;
 int direction; // This is the direction the player is going in if inputed. 
 int ghostCounter; //This is a good workaround that allows the code to keep track of which type of ghost it is spawning.
 boolean checkRelease; //This checks to see if the keyPressed is now released. Limits inputd.
@@ -20,10 +21,12 @@ void setup() // Pretty sure this is the entry point
   checkRelease = true;
   direction = 2;
   ghostCounter = 0;
+  framers = -179;
   
   bList = new ArrayList<Bullet>();
   board  = new Board();
   player = new Player(board.nList[16].x1,board.nList[16].y1,50,50); // Places the player in the near center of the board, on a node.
+  sboard = new Scoreboard();
   
   ghost = new Ghost();
   gList = new Ghost[4];
@@ -34,7 +37,7 @@ void setup() // Pretty sure this is the entry point
 }
 
 void draw()
-{
+{  
   background(51);
   if(gameMenu==true)  image(gameMenuBackground,0,0);
     
@@ -59,7 +62,7 @@ void draw()
           bList.remove(i);
       }  
     }
-    if(frameCount % 180 == 0 && ghostCounter < 4 && gameMode==true)  {    ghost.spawn();  ghostCounter++;} //Spawns ghost on 5 sec intervals and maxes out at 4 ghosts.
+    if(framers % 180 == 0 && ghostCounter < 4 )  {    ghost.spawn();  ghostCounter++; System.out.println("ghostCounter: " + ghostCounter);} //Spawns ghost on 5 sec intervals and maxes out at 4 ghosts.
     
     for(int i = 0; i < gList.length; i++)  
     {
@@ -69,9 +72,12 @@ void draw()
         gList[i].move(); 
         gList[i].show();
       }  // Goes through the array of ghosts. Update their current nodes, moves them, then draws them.
+      
     }
     
     player.show();  //Draws the player.
+    sboard.show();
+    framers++;
    }
    if(gameOver==true)  image(gameOverBackground,0,0);
   

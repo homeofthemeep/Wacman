@@ -241,13 +241,12 @@ public class Board
       {
         pList[checker] = null;
         player.score+=10;
-        player.ammo+=5;
+        player.ammo+=9;
       }
       else
       {
         pList[checker] = null;
         player.score++;
-        player.ammo+=1;
       }
     }
   }
