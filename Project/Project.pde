@@ -112,7 +112,7 @@ void draw()
           bList.remove(i);
       }  
     }
-    if(framers % 180 == 0 && ghostCounter < 4 )  {    ghost.spawn();  ghostCounter++; System.out.println("ghostCounter: " + ghostCounter);} //Spawns ghost on 5 sec intervals and maxes out at 4 ghosts.
+    if(framers % 180 == 0 && ghostCounter < 4 )  {    ghost.spawn();  ghostCounter++; framers = -179;} //Spawns ghost on 5 sec intervals and maxes out at 4 ghosts.
     
     for(int i = 0; i < gList.length; i++)  
     {

@@ -182,6 +182,7 @@ public class Ghost
       gList[checker].maxHealth--;
       if(gList[checker].maxHealth <= 0)
       {
+        framers = -179;
         gList[checker] = null;
         ghostCounter--;
         player.score+=20;
