@@ -115,6 +115,7 @@ public class Player
     {
       meDed.play();
       sboard.saveHighScore();
+      delay((int)(meDed.duration()*1000) + 100);
       setup(0);
       gameMode=false;
       gameOver=true;
