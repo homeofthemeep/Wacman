@@ -48,7 +48,7 @@ class GhostAnim extends Animation
     
   }
 }
-
+/*
 class PlayerAnim extends Animation
 {
   PlayerAnim(String imagePrefix, int count)
@@ -105,3 +105,4 @@ class PlayerAnim extends Animation
     
   }
 }
+*/

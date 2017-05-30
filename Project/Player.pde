@@ -1,7 +1,7 @@
 public class Player
 {
   public int x, y, direction, storedDir, score, ammo;
-  public PlayerAnim idle;
+  public GhostAnim idle;
   public Node curNode, prevNode, targetNode;
   RectCollision body;
   
@@ -10,7 +10,7 @@ public class Player
   public Player(int x, int y, int wCol, int hCol)
   {
     body = new RectCollision(width/2, height/2, wCol-1, hCol-1);
-    idle = new PlayerAnim("/data/images/wacman2_big_anim", 4);
+    idle = new GhostAnim("/data/images/wacman_big_anim", 2);
     this.x = x; this.y = y;  
     direction = 2;
     storedDir = 2;
