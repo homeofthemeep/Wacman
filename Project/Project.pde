@@ -16,8 +16,8 @@ boolean gameMenu=true;
 
 void setup() // Pretty sure this is the entry point
 { 
-  gameMenuBackground = loadImage("wacman_mainmenu.png");
-  gameOverBackground = loadImage("wacman_gameover.png");
+  gameMenuBackground = loadImage("/data/images/wacman_mainmenu.png");
+  gameOverBackground = loadImage("/data/images/wacman_gameover.png");
   checkRelease = true;
   direction = 2;
   ghostCounter = 0;

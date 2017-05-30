@@ -7,7 +7,7 @@ public class Pellet extends RectCollision
   {
     super(superX,superY,w,h);
     this.x = x; this.y = y;
-    sprite = loadImage("smallPellet.png");
+    sprite = loadImage("/data/images/smallPellet.png");
   }    
   
   public void show()//Going to be replaced with an image. 
@@ -23,7 +23,7 @@ public class BigPellet extends Pellet
   {
     super(x,y, superX, superY,w, h);
     this.x = x; this.y = y;
-    sprite = loadImage("bigPellet.png");
+    sprite = loadImage("/data/images/bigPellet.png");
   }
   
   public void show()//Going to be replaced with an image. 

@@ -17,19 +17,19 @@ public class Ghost
     direction = (int)random(0, 4);
     if(types[0])
     {
-      idle = new GhostAnim("blinky_big_anim", 2);
+      idle = new GhostAnim("/data/images/blinky_big_anim", 2);
     }
     if(types[1])
     {
-      idle = new GhostAnim("pinky_big_anim", 2);
+      idle = new GhostAnim("/data/images/pinky_big_anim", 2);
     }
     if(types[2])
     {
-      idle = new GhostAnim("inky_big_anim", 2);
+      idle = new GhostAnim("/data/images/inky_big_anim", 2);
     }
     if(types[3])
     {
-      idle = new GhostAnim("clyde_big_anim", 2);
+      idle = new GhostAnim("/data/images/clyde_big_anim", 2);
     }
   }
   

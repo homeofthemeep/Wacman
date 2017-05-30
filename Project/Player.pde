@@ -10,7 +10,7 @@ public class Player
   public Player(int x, int y, int wCol, int hCol)
   {
     body = new RectCollision(width/2, height/2, wCol-1, hCol-1);
-    idle = new PlayerAnim("wacman2_big_anim", 4);
+    idle = new PlayerAnim("/data/images/wacman2_big_anim", 4);
     this.x = x; this.y = y;  
     direction = 2;
     storedDir = 2;

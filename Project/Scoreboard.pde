@@ -10,9 +10,9 @@ public class Scoreboard
     hsGame = false;
     str = new String[1];
     //this.x = x; this.y = y;
-    font = createFont("OCRAStd.otf", 32);
+    font = createFont("/data/OCRAStd.otf", 32);
     textFont(font);
-    str = loadStrings("highscore.txt");
+    str = loadStrings("/data/highscore.txt");
     highscore = int(str[0]);
     r = g = b = 255;
   }
@@ -52,7 +52,7 @@ public class Scoreboard
   void saveHighScore()
   {
     str[0] = str(highscore);
-    saveStrings("highscore.txt", str);
+    saveStrings("/data/highscore.txt", str);
   }
   
   

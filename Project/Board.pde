@@ -9,7 +9,7 @@ public class Board
   
   public Board()
   {
-    background = loadImage("wacman_layout1_det.png");
+    background = loadImage("/data/images/wacman_layout1_det.png");
     colList = new RectCollision[64];
     nList = new Node[64];
     pList = new Pellet[140];
