@@ -115,7 +115,7 @@ public class Player
     {
       meDed.play();
       sboard.saveHighScore();
-      setup();
+      setup(0);
       gameMode=false;
       gameOver=true;
     }

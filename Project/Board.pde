@@ -231,6 +231,16 @@ public class Board
     }
   }
   
+  public boolean ifWin()
+  {
+    for(int i = 0; i < pList.length; i++)
+    {
+      if(pList[i]!=null)
+        return false;     
+    }
+    return true;
+  }
+  
   public void updatePellet() //Finds if any pellet on the board is picked up. Checks for bigPellets too.
   {
     int checker = isTouchingPellet();

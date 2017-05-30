@@ -44,12 +44,41 @@ void setup() // Pretty sure this is the entry point
   //board.show();
 }
 
+void setup(int score) // Pretty sure this is the entry point
+{ 
+  shoot = new SoundFile(this, "shoot.wav");
+  wacka = new SoundFile(this, "dc.wav");
+  gDed  = new SoundFile(this, "tri.wav");
+  meDed = new SoundFile(this, "tri.wav");
+  
+  gameMenuBackground = loadImage("/data/images/wacman_mainmenu.png");
+  gameOverBackground = loadImage("/data/images/wacman_gameover.png");
+  checkRelease = true;
+  direction = 2;
+  ghostCounter = 0;
+  framers = -179;
+  
+  bList = new ArrayList<Bullet>();
+  board  = new Board();
+  player = new Player(board.nList[16].x1,board.nList[16].y1,50,50); // Places the player in the near center of the board, on a node.
+  sboard = new Scoreboard();
+  
+  player.score = score;
+  
+  ghost = new Ghost();
+  gList = new Ghost[4];
+  
+  background(51);
+  fullScreen();
+  //board.show();
+}
+
 void draw()
 {  
   background(51);
   if(gameMenu==true)  image(gameMenuBackground,0,0);
     
-  if(gameMode==true)
+  if(gameMode==true && !board.ifWin())
   {
     player.curNode = player.getNodeAtPos(); // I could put this in a new player method but this works fine. Constantly checks if the player is at a node and setting it.
     player.move(); //This method moves the player.
@@ -86,7 +115,15 @@ void draw()
     player.show();  //Draws the player.
     sboard.show();
     framers++;
+    
    }
+   if(board.ifWin())
+    {
+      delay(1000);
+      gDed.play();
+      delay(3000);
+      setup(player.score);
+    }
    if(gameOver==true)  image(gameOverBackground,0,0);
   
   
