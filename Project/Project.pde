@@ -119,7 +119,18 @@ void draw()
    }
    if(board.ifWin())
     {
+     switch(direction)
+      {
+        case 0: player.y-=50; break;
+        case 1: player.y+=50; break;
+        case 2: player.x-=50; break;
+        case 3: player.x+=50; break;
+      }
       delay(1000);
+      gDed.play();
+      delay(500);
+      gDed.play();
+      delay(500);
       gDed.play();
       delay(3000);
       setup(player.score);
