@@ -5,7 +5,7 @@ public Ghost ghost; // This is a special ghost that will call relatively importa
 public Player player; // This  is the player. I mean it's a  game right? You got to want to play it? Why am I explaining this!?!?!?
 public Ghost[] gList; // This is the list of ghosts that will in the game serving as enemies to the player.
 public Scoreboard sboard;
-public SoundFile shoot, wacka, gDed, meDed;
+public SoundFile shoot, wacka, gDed, meDed, nextlvl, startup, mmmusic, gomusic;
 PImage gameOverBackground;
 PImage gameMenuBackground;
 
@@ -17,13 +17,19 @@ boolean checkRelease; //This checks to see if the keyPressed is now released. Li
 ArrayList<Bullet> bList;//This is the ArrayList of Bullets that the player will create into the world. We don't know how many bullets the player will create so we use an ArrayList.
 boolean gameMode, gameOver=false;
 boolean gameMenu=true;
+float musicCounter, musicCounter2;
 
 void setup() // Pretty sure this is the entry point
 { 
-  shoot = new SoundFile(this, "shoot.wav");
-  wacka = new SoundFile(this, "dc.wav");
-  gDed  = new SoundFile(this, "tri.wav");
-  meDed = new SoundFile(this, "tri.wav");
+  shoot = new SoundFile(this, "/sounds/shoot.wav");
+  wacka = new SoundFile(this, "/sounds/dc.wav");
+  gDed  = new SoundFile(this, "/sounds/tri.wav");
+  meDed = new SoundFile(this, "/sounds/wacman_playerdeath.wav");
+  nextlvl = new SoundFile(this, "/sounds/wacman_nextlevel.wav");
+  startup = new SoundFile(this, "/sounds/wacman_startup.wav");
+  mmmusic = new SoundFile(this, "/sounds/wacman_mainmenu_music.wav");
+  gomusic = new SoundFile(this, "/sounds/wacman_gameover_music.wav");
+  musicCounter = mmmusic.frames(); musicCounter2 = gomusic.frames();
   
   gameMenuBackground = loadImage("/data/images/wacman_mainmenu.png");
   gameOverBackground = loadImage("/data/images/wacman_gameover.png");
@@ -47,10 +53,15 @@ void setup() // Pretty sure this is the entry point
 
 void setup(int score) // Pretty sure this is the entry point
 { 
-  shoot = new SoundFile(this, "shoot.wav");
-  wacka = new SoundFile(this, "dc.wav");
-  gDed  = new SoundFile(this, "tri.wav");
-  meDed = new SoundFile(this, "tri.wav");
+  shoot = new SoundFile(this, "/sounds/shoot.wav");
+  wacka = new SoundFile(this, "/sounds/dc.wav");
+  gDed  = new SoundFile(this, "/sounds/tri.wav");
+  meDed = new SoundFile(this, "/sounds/wacman_playerdeath.wav");
+  nextlvl = new SoundFile(this, "/sounds/wacman_nextlevel.wav");
+  startup = new SoundFile(this, "/sounds/wacman_startup.wav");
+  mmmusic = new SoundFile(this, "/sounds/wacman_mainmenu_music.wav");
+  gomusic = new SoundFile(this, "/sounds/wacman_gameover_music.wav");
+  musicCounter = mmmusic.frames(); musicCounter2 = gomusic.frames();
   
   gameMenuBackground = loadImage("/data/images/wacman_mainmenu.png");
   gameOverBackground = loadImage("/data/images/wacman_gameover.png");
@@ -77,10 +88,11 @@ void setup(int score) // Pretty sure this is the entry point
 void draw()
 {  
   background(51);
-  if(gameMenu==true)  image(gameMenuBackground,0,0);
-    
+  if(gameMenu==true)  {image(gameMenuBackground,0,0); if((mmmusic.frames()/(60)) < musicCounter){mmmusic.play(); musicCounter = 0;} musicCounter+=12.5;}
+  
   if(gameMode==true && !board.ifWin())
   {
+    
     player.curNode = player.getNodeAtPos(); // I could put this in a new player method but this works fine. Constantly checks if the player is at a node and setting it.
     player.move(); //This method moves the player.
     board.updatePellet(); //This method checks to see if any pellets are picked up by the player
@@ -112,7 +124,7 @@ void draw()
       }  // Goes through the array of ghosts. Update their current nodes, moves them, then draws them.
       
     }
-    if(!board.ifWin())
+    //if(!board.ifWin())
     player.show();  //Draws the player.
     sboard.show();
     framers++;
@@ -121,16 +133,11 @@ void draw()
    if(board.ifWin())
     {
       player.idle.display(lastpellet.x,lastpellet.y);
-      delay(1000);
-      gDed.play();
-      delay(500);
-      gDed.play();
-      delay(500);
-      gDed.play();
-      delay(3000);
+      nextlvl.play();
+      delay((int)((nextlvl.duration()*1000)+250));
       setup(player.score);
     }
-   if(gameOver==true)  image(gameOverBackground,0,0);
+   if(gameOver==true)  {image(gameOverBackground,0,0); if((gomusic.frames()/(60)) < musicCounter2){gomusic.play(); musicCounter2 = 0;} musicCounter2+=12.5;}
   
   
 }
@@ -158,11 +165,11 @@ void mouseClicked()
 {
   
   //mainmenu workers
-  if(mouseX> 1040 && mouseX<1840 && mouseY> 300 && mouseY<400 && gameMenu==true) {  gameMenu=false;  gameMode=true; gameOver=false; } //play button
+  if(mouseX> 1040 && mouseX<1840 && mouseY> 300 && mouseY<400 && gameMenu==true) {  gameMenu=false;  gameMode=true; gameOver=false; mmmusic.stop(); startup.play(); delay((int)(startup.duration()*1000));} //play button
   if(mouseX> 1040 && mouseX<1840 && mouseY> 500 && mouseY<600 && gameMenu==true) {  exit(); } //exit
   
   //gameover workers
-  if(mouseX> 1040 && mouseX<1840 && mouseY> 300 && mouseY<400 && gameOver==true) {  gameMenu=false;  gameMode=true; gameOver=false;} //play button
-  if(mouseX> 1040 && mouseX<1840 && mouseY> 500 && mouseY<600 && gameOver==true) {  gameMenu=true;  gameMode=false; gameOver=false; } //menu button
+  if(mouseX> 1040 && mouseX<1840 && mouseY> 300 && mouseY<400 && gameOver==true) {  gameMenu=false;  gameMode=true; gameOver=false; gomusic.stop(); startup.play(); delay((int)(startup.duration()*1000));} //play button
+  if(mouseX> 1040 && mouseX<1840 && mouseY> 500 && mouseY<600 && gameOver==true) {  gameMenu=true;  gameMode=false; gameOver=false; gomusic.stop();} //menu button
  
 }
