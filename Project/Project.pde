@@ -126,6 +126,7 @@ void draw()
         case 2: player.x-=50; break;
         case 3: player.x+=50; break;
       }
+      player.show();
       delay(1000);
       gDed.play();
       delay(500);
