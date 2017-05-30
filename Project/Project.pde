@@ -86,6 +86,7 @@ void draw()
 
 void keyPressed() //W,A,S,D movement. K is shoot. You can only shoot in the direction you are going in.
 {
+  if(key==ESC)                 {sboard.saveHighScore(0); exit();}
   if(key=='w' && checkRelease) {direction = 0;  player.changePos(direction); checkRelease = false;}
   if(key=='s' && checkRelease) {direction = 1;  player.changePos(direction); checkRelease = false;}
   if(key=='a' && checkRelease) {direction = 2;  player.changePos(direction); checkRelease = false;}
