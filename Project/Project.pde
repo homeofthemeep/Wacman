@@ -107,7 +107,7 @@ void mouseClicked()
   
   //mainmenu workers
   if(mouseX> 1040 && mouseX<1840 && mouseY> 300 && mouseY<400 && gameMenu==true) {  gameMenu=false;  gameMode=true; gameOver=false; } //play button
-  if(mouseX> 1040 && mouseX<1840 && mouseY> 500 && mouseY<600 && gameMenu==true) { exit(); } //exit
+  if(mouseX> 1040 && mouseX<1840 && mouseY> 500 && mouseY<600 && gameMenu==true) {  sboard.saveHighScore(0); exit(); } //exit
   
   //gameover workers
   if(mouseX> 1040 && mouseX<1840 && mouseY> 300 && mouseY<400 && gameOver==true) {  gameMenu=false;  gameMode=true; gameOver=false;} //play button

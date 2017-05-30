@@ -54,6 +54,11 @@ public class Scoreboard
     str[0] = str(highscore);
     saveStrings("/data/highscore.txt", str);
   }
+  void saveHighScore(int z)
+  {
+    str[0] = str(z);
+    saveStrings("/data/highscore.txt", str);
+  }
   
   
 }
