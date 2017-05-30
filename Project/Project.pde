@@ -94,7 +94,7 @@ void draw()
 
 void keyPressed() //W,A,S,D movement. K is shoot. You can only shoot in the direction you are going in.
 {
-  if(key==ESC)                 {sboard.saveHighScore(0); exit();}
+  if(key==ESC)                 { exit();}
   if(key=='w' && checkRelease) {direction = 0;  player.changePos(direction); checkRelease = false;}
   if(key=='s' && checkRelease) {direction = 1;  player.changePos(direction); checkRelease = false;}
   if(key=='a' && checkRelease) {direction = 2;  player.changePos(direction); checkRelease = false;}
@@ -116,7 +116,7 @@ void mouseClicked()
   
   //mainmenu workers
   if(mouseX> 1040 && mouseX<1840 && mouseY> 300 && mouseY<400 && gameMenu==true) {  gameMenu=false;  gameMode=true; gameOver=false; } //play button
-  if(mouseX> 1040 && mouseX<1840 && mouseY> 500 && mouseY<600 && gameMenu==true) {  sboard.saveHighScore(0); exit(); } //exit
+  if(mouseX> 1040 && mouseX<1840 && mouseY> 500 && mouseY<600 && gameMenu==true) {  exit(); } //exit
   
   //gameover workers
   if(mouseX> 1040 && mouseX<1840 && mouseY> 300 && mouseY<400 && gameOver==true) {  gameMenu=false;  gameMode=true; gameOver=false;} //play button
